@@ -1,35 +1,35 @@
 ## makeCacheMatrix - Add inverse and caching functionality to an invertible matrix
 ## cacheSolve - Return the inverse of a cache matrix
 
-## takes an invertible matrix and returns the matrix with inverse and caching functionality
+## Takes an invertible matrix and returns the matrix with inverse and caching functionality
 
 makeCacheMatrix <- function(x = matrix()) {
-  ## define empty inverse matrix property
+  ## Define empty inverse matrix property
   m <- NULL
-  ## set x equal to matrix y and inverse matrix property m to null
+  ## Set x equal to matrix y and inverse matrix property m to null
   set <- function(y) {
     x <<- y
     m <<- NULL
   }
-  ## return original invertible matrix
+  ## Return original invertible matrix
   get <- function() x
-  ## set inverse matrix property m equal inverse value
+  ## Set inverse matrix property m equal inverse value
   setInverse <- function(inverse) m <<- inverse
-  ## return inverse matrix property
+  ## Return inverse matrix property
   getInverse <- function() m
-  ## return list of functions added to invertible matrix x
+  ## Return list of functions added to invertible matrix x
   list(set = set, get = get,
        setInverse = setInverse,
        getInverse = getInverse)
 }
 
 
-## Write a short comment describing this function
+## Return the inverse of a matrix from cache if available or by solving
 
 cacheSolve <- function(x, ...) {
   ## Return a matrix that is the inverse of 'x'
   m <- x$getInverse()
-  ## if inverse has already been computed, return cached value...
+  ## If inverse has already been computed, return cached value...
   if(!is.null(m)) {
     message("getting cached data")
     return(m)
@@ -38,6 +38,6 @@ cacheSolve <- function(x, ...) {
   data <- x$get()
   m <- solve(data, ...)
   x$setInverse(m)
-  ## return inverse matrix
+  ## Return inverse matrix
   m
 }
